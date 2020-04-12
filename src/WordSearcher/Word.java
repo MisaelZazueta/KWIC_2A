@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 
-public class Word {
+public class Word implements Comparable<Word>{
     private String word;
     private HashSet<Integer> pages;
     public Word(String word){
@@ -36,5 +36,10 @@ public class Word {
                 line += pagesA.get(i);
         }
         return line;
+    }
+
+    @Override
+    public int compareTo(Word o) {
+        return this.word.compareTo(o.word);
     }
 }

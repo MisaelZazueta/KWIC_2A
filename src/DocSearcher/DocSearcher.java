@@ -47,7 +47,7 @@ public class DocSearcher {
                     System.out.println("Invalid Selection");
                 }
             } while (selectionInt <= 0 && selectionInt > filesInFolder.size());
-            this.file = filesInFolder.get(selectionInt);
+            this.file = filesInFolder.get(selectionInt - 1);
             return this.file;
         }
         else{

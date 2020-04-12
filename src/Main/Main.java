@@ -4,6 +4,8 @@ import AndSearcher.And;
 import AndSearcher.AndIndex;
 import AndSearcher.AndSearcher;
 import DocSearcher.DocSearcher;
+import FullIndexGenerator.FullIndexCreator;
+import FullIndexGenerator.WordsToIgnore;
 import GeneralSearcher.Searcher;
 import KWIC.KWICLector;
 import KWIC.ObservadorAlfabetizador;
@@ -24,6 +26,14 @@ import java.util.List;
 
 public class Main{
     public static void main(String args[]) throws IOException {
+        KWICLector readerFullIndex = new KWICLector();
+        WordsToIgnore wordsToIgnore = new WordsToIgnore();
+        readerFullIndex.agregadorEscuchador(wordsToIgnore);
+        File fileWordsToIgnore = new File("Ignore.txt");
+        readerFullIndex.leerArchivo(fileWordsToIgnore);
+        FullIndexCreator fullIndexCreator = new FullIndexCreator(wordsToIgnore.getWordsToIgnore());
+
+
         KWICLector readerWordsIndex = new KWICLector();
         WordIndex wordIndex = new WordIndex();
         ObservadorAlfabetizador alfabetizadorWords = new ObservadorAlfabetizador();
@@ -70,6 +80,7 @@ public class Main{
         searcher.setChangeSupporters(phraseSearcher);
         searcher.setChangeSupporters(wordSearcher);
         searcher.setChangeSupporters(andSearcher);
+        searcher.setChangeSupporters(fullIndexCreator);
 
         String routeOfTheFile = "C:\\Users\\Usuari0\\Desktop\\Misael Zazueta\\Maestria en Ciencias";
         String keyWordOfTheFile = "Principito";
@@ -116,5 +127,10 @@ public class Main{
         System.out.println("----AND INDEX----");
         for (And and : andSearcher.getAndIndex())
             System.out.println(and);
+        System.out.println();
+
+        System.out.println("----FULL INDEX----");
+        for(Word word : fullIndexCreator.getFullIndex())
+            System.out.println(word);
     }
 }
