@@ -1,6 +1,10 @@
 /*Sistema KWIC v2.1
 * Autor: Ing. Jose Misael Burruel Zazueta
 *
+* Para el KWIC v2.1 se siguio utilizando el Modelo de invocacion implicita al igual que en la v1.0
+* No se modifico ninguna linea de codigo del KWIC v1.0
+*
+*
 * En la carpeta SRC se encuentran los directorios que componen al sistema KWIC v2.1
 * Estos directorios se nombran segun su proposito en el sistema:
 * Main: Se ecuentra la clase main, que es la aplicacion del sistema.
