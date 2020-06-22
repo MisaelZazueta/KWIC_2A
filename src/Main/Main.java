@@ -39,13 +39,18 @@ import java.util.List;
 
 public class Main{
     public static void main(String args[]) throws IOException {
-        KWICLector readerFullIndex = new KWICLector();
-        WordsToIgnore wordsToIgnore = new WordsToIgnore();
-        readerFullIndex.agregadorEscuchador(wordsToIgnore);
-        File fileWordsToIgnore = new File("Ignore.txt");
-        readerFullIndex.leerArchivo(fileWordsToIgnore);
-        FullIndexCreator fullIndexCreator = new FullIndexCreator(wordsToIgnore.getWordsToIgnore());
 
+        KWICLector readerFullIndex = new KWICLector(); // Se crea un lector de archivos txt
+        WordsToIgnore wordsToIgnore = new WordsToIgnore(); // Se crea un indice de palabras a ignorar
+        readerFullIndex.agregadorEscuchador(wordsToIgnore); // Se agrega un observador al lector del FullIndex
+        File fileWordsToIgnore = new File("Ignore.txt");
+        readerFullIndex.leerArchivo(fileWordsToIgnore); // Se envia el archivo txt al lector para generar el indice
+        FullIndexCreator fullIndexCreator = new FullIndexCreator(wordsToIgnore.getWordsToIgnore()); // se envia el indice de palabras a ignorar al generador de fullIndex
+
+        /*El proceso anterior explicado en los comentarios se repite similarmente para cada uno de los buscadores
+        * Se utilizaron tanto el lector del KWIC original para leer el archivo pdf,
+        * como el alfabetizador para ordenar los indices.
+        */
 
         KWICLector readerWordsIndex = new KWICLector();
         WordIndex wordIndex = new WordIndex();
@@ -96,7 +101,7 @@ public class Main{
         searcher.setChangeSupporters(fullIndexCreator);
 
         String routeOfTheFile = "C:\\Users\\Usuari0\\Desktop\\Misael Zazueta\\Maestria en Ciencias";
-        String keyWordOfTheFile = "Principito";
+        String keyWordOfTheFile = ".pdf";
 
         DocSearcher docSearcher = new DocSearcher(routeOfTheFile, keyWordOfTheFile);
         File fileA = docSearcher.docSearcher();
